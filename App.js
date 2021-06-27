@@ -21,8 +21,10 @@ const MyApp = () => {
   )
   const [number, setNumber] = useState(0);
   const [URL, setWeb] = useState({ name: 'Portfolio', button: 'https://portfolio.ankitjailwal.engineer/', stateBoolen: true })
-  const stateHandler = () => {
+  const addNumber = () => {
     setNumber(number + 5)
+  }
+  const stateHandler = () => {
     if (URL.stateBoolen)
       setWeb({ name: 'LinkedIn', button: 'https://www.linkedin.com/in/ankit-jailwal-776712173/', stateBoolen: false })
     else
@@ -30,21 +32,22 @@ const MyApp = () => {
   }
   return (
     <View style={styles.container}>
-    <ScrollView showsVerticalScrollIndicator={false}>
-      {
-        Items.map((item) => {
-          return (
-            <View style={styles.box1}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: "center", key:item.key}}>
-              <Text style={{
-                fontSize: 16, color: 'black', fontWeight: "bold",
-              }}>{item.itemName}</Text></View>
-          </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {
+          Items.map((item) => {
+            return (
+              <View style={styles.box1}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: "center", key: item.key }}>
+                  <Text style={{
+                    fontSize: 16, color: 'black', fontWeight: "bold",
+                  }}>{item.itemName}</Text></View>
+              </View>
+            )
+          }
           )
         }
-        )
-      }
-      
+      </ScrollView>
+      <View><Text style={{ fontSize: 50, fontWeight: "bold", color: "#ff6e90" }}>{number}</Text></View>
       <View style={{ height: 30 }}></View>
       <TouchableOpacity onPress={() => { Linking.openURL(URL.button) }} >
         <View style={styles.box2}>
@@ -55,17 +58,28 @@ const MyApp = () => {
         </View>
       </TouchableOpacity>
       <View style={{ height: 30 }}></View>
-      <TouchableOpacity onPress={stateHandler}>
-        <View style={styles.box3}>
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: "center" }}>
-            <Text style={{
-              fontSize: 12, color: 'black', fontWeight: "bold"
-            }}>Click Me!</Text>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity onPress={stateHandler}>
+          <View style={styles.box3}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: "center" }}>
+              <Text style={{
+                fontSize: 12, color: 'black', fontWeight: "bold"
+              }}>Click Me!</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <View style={{ width: 30 }}></View>
+        <TouchableOpacity onPress={addNumber}>
+          <View style={styles.box3}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: "center" }}>
+              <Text style={{
+                fontSize: 12, color: 'black', fontWeight: "bold"
+              }}>Add More!</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
       <View style={{ height: 30 }}></View>
-      </ScrollView>
     </View>
   );
 };
@@ -79,9 +93,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   box1: {
-    height: 100,
-    width: 100,
-    backgroundColor: 'red',
+    height: 250,
+    width: 250,
+    paddingBottom: 30,
+    backgroundColor: 'gold',
     borderRadius: 10,
     borderColor: 'black',
     shadowColor: 'red',
@@ -89,8 +104,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 1,
     elevation: 10,
-    marginBottom:5,
-    marginTop:5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
   },
   appButtonContainer: {
     elevation: 8,
